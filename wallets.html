@@ -1,36 +1,123 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Remove Numbers and Dots</title>
+    <!-- Tambahkan Font Google dan CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            color: #444;
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            font-size: 1em;
+            color: #555;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+            resize: none;
+        }
+
+        input[type="button"], button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        input[type="button"]:hover, button:hover {
+            background-color: #0056b3;
+        }
+
+        h2 {
+            margin-top: 20px;
+            font-size: 1.4em;
+            color: #333;
+        }
+
+        #resultText {
+            margin-top: 10px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            min-height: 50px;
+            word-wrap: break-word;
+            font-size: 1em;
+        }
+    </style>
 </head>
 <body>
-    <h1>Remove Numbers and Dots</h1>
-    <form>
-        <label for="inputText">Masukkan kata-kata:</label><br>
-        <textarea id="inputText" rows="4" cols="50"></textarea><br><br>
-        <input type="button" value="Hapus Angka dan Titik" onclick="removeNumbersAndDots()">
-    </form>
+    <div class="container">
+        <h1>Remove Numbers and Dots</h1>
+        <form>
+            <label for="inputText">Masukkan kata-kata:</label>
+            <textarea id="inputText" placeholder="Ketik sesuatu..."></textarea>
+            <input type="button" value="Hapus Angka dan Titik" onclick="removeNumbersAndDots()">
+        </form>
 
-    <h2>Hasil:</h2>
-    <p id="resultText"></p>
-
-    <button onclick="copyResult()">Salin Hasil</button>
+        <h2>Hasil:</h2>
+        <p id="resultText">Hasil akan muncul di sini...</p>
+        <button onclick="copyResult()">Salin Hasil</button>
+    </div>
 
     <script>
         function removeNumbersAndDots() {
             var inputText = document.getElementById("inputText").value;
             var resultText = inputText.replace(/[0-9.]/g, '');
-            document.getElementById("resultText").textContent = resultText;
+            document.getElementById("resultText").textContent = resultText.trim() || "Tidak ada hasil.";
         }
 
         function copyResult() {
             var resultText = document.getElementById("resultText").textContent;
             var textArea = document.createElement("textarea");
-            textArea.value = resultText.replace(/\n/g, ' ').trim(); // Menggabungkan teks dalam satu baris tanpa spasi
+            textArea.value = resultText;
             document.body.appendChild(textArea);
             textArea.select();
             document.execCommand("Copy");
             document.body.removeChild(textArea);
+            alert("Hasil berhasil disalin!");
         }
     </script>
 </body>
